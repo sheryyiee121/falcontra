@@ -6,17 +6,43 @@ import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import Lenis from '@studio-freight/lenis';
 
 function App() {
     const [hash, setHash] = useState(window.location.hash);
 
     useEffect(() => {
+        // Initialize Lenis smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Handle Hash Routing
         const handleHashChange = () => {
             setHash(window.location.hash);
             window.scrollTo(0, 0);
         };
         window.addEventListener('hashchange', handleHashChange);
-        return () => window.removeEventListener('hashchange', handleHashChange);
+
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange);
+            lenis.destroy();
+        };
     }, []);
 
     const isTruckPage = hash.startsWith('#truck/');
