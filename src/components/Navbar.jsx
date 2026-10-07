@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiMenu, FiX, FiCheckSquare } from 'react-icons/fi';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,22 +22,56 @@ const Navbar = () => {
 
                     {/* Desktop Menu */}
                     <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-                        <a href="#services" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                        <a href="/#services" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
                             Services <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
                         </a>
-                        <a href="#trucks" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
-                            Trucks <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
-                        </a>
-                        <a href="#owner-operators" className="bg-primary-500 text-white font-semibold px-4 py-2 hover:bg-primary-600 transition-colors text-[15px]">
+                        <div className="relative group/trucks py-6">
+                            <a href="/#fleet" className="flex items-center text-gray-900 font-bold hover:text-primary-500 transition-colors text-[16px] cursor-pointer">
+                                Trucks <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
+                            </a>
+
+                            {/* Dropdown Menu */}
+                            <div className="absolute top-[80px] left-0 bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] opacity-0 invisible group-hover/trucks:opacity-100 group-hover/trucks:visible transition-all duration-300 w-[340px] px-2 py-4 rounded-b-lg border-t-2 border-red-500">
+                                <a href="#truck/box-truck" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500">26ft Box Truck Services</span>
+                                </a>
+                                <a href="#truck/dry-van" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500">Dry Van Services</span>
+                                </a>
+                                <a href="#truck/step-deck" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500">Step Deck Services</span>
+                                </a>
+                                <a href="#truck/reefer" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500">Reefer Services</span>
+                                </a>
+                                <a href="#truck/flatbed" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500">Flatbed Services</span>
+                                </a>
+                                <a href="#truck/hotshot" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500">Hotshot Service</span>
+                                </a>
+                                <a href="#truck/conestoga" className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors group/link cursor-pointer">
+                                    <div className="w-1.5 h-1.5 bg-red-600 outline outline-2 outline-offset-1 outline-red-600/30"></div>
+                                    <span className="text-gray-900 font-semibold text-[15px] group-hover/link:text-red-500 flex-1 leading-snug">Conestoga Trailer Services</span>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="/#" className="bg-[#ff817d] hover:bg-[#ff6b67] text-white font-bold px-5 py-2 transition-colors text-[15px]">
                             Owner-operators
                         </a>
-                        <a href="#faq" className="text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                        <a href="#/faq" className="text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
                             FAQ
                         </a>
-                        <a href="#company" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                        <a href="/#about" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
                             Company <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
                         </a>
-                        <a href="#contact" className="text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px] pr-2">
+                        <a href="#/contact" className="text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px] pr-2">
                             Contact us
                         </a>
                     </div>
@@ -74,13 +108,13 @@ const Navbar = () => {
                         <a href="#owner-operators" className="block text-primary-500 font-semibold">
                             Owner-operators
                         </a>
-                        <a href="#faq" className="block text-gray-900 font-medium">
+                        <a href="#/faq" className="block text-gray-900 font-medium">
                             FAQ
                         </a>
-                        <a href="#company" className="flex items-center justify-between text-gray-900 font-medium">
+                        <a href="/#about" className="flex items-center justify-between text-gray-900 font-medium">
                             Company <FiChevronDown className="text-gray-500" />
                         </a>
-                        <a href="#contact" className="block text-gray-900 font-medium">
+                        <a href="#/contact" className="block text-gray-900 font-medium">
                             Contact us
                         </a>
                         <a href="https://wa.me/15144648797" target="_blank" rel="noopener noreferrer" className="block mt-6 bg-primary-500 text-white font-bold text-center py-3.5">
