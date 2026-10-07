@@ -1,127 +1,135 @@
-import React from 'react';
-import { FaTruck, FaArrowRight, FaPlay } from 'react-icons/fa';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import React, { useState } from 'react';
+import { FaStar, FaInfoCircle } from 'react-icons/fa';
 
 const Hero = () => {
-    const heroRef = useScrollAnimation();
-    const contentRef = useScrollAnimation();
-    const imageRef = useScrollAnimation();
-    const statsRef = useScrollAnimation();
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+
+    const handleWhatsAppSubmit = (e) => {
+        e.preventDefault();
+        const text = encodeURIComponent(`Hi, I'm requesting a setup quote.\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}`);
+        window.open(`https://wa.me/15144648797?text=${text}`, '_blank');
+    };
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-orange-50 to-white overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl animate-bounce-slow"></div>
-                <div className="absolute top-40 right-10 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl animate-bounce-slow animation-delay-2000"></div>
-                <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-bounce-slow animation-delay-4000"></div>
+        <div className="relative bg-[#f8fbff] min-h-[92vh] flex items-center overflow-hidden">
+            {/* Background Image for Right Side (Desktop) */}
+            <div className="absolute inset-y-0 right-0 w-[55%] hidden lg:block">
+                <img
+                    src="/images/roger-starnes-sr-hu443w5ov5o-unsplash.jpg"
+                    alt="Shiny American Peterbilt truck"
+                    className="w-full h-full object-cover object-center bg-gray-200"
+                />
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Content */}
-                    <div ref={contentRef} className="space-y-8 scroll-fade-in">
-                        <div className="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                            <FaTruck className="mr-2" />
-                            Professional Truck Dispatching
+            {/* Gentle Curve SVG separating left and right */}
+            <div className="absolute inset-y-0 left-[45%] hidden lg:block w-[15vw] z-10 translate-x-[-1px]">
+                <svg className="h-full w-full text-[#f8fbff]" viewBox="0 0 100 100" preserveAspectRatio="none" fill="currentColor">
+                    <path d="M0,0 C100,30 100,70 0,100 Z" />
+                </svg>
+            </div>
+
+            {/* Content Container */}
+            <div className="relative z-20 w-full lg:w-[60%] px-4 sm:px-6 lg:px-12 xl:px-24 py-16 lg:py-24 bg-[#f8fbff] lg:bg-transparent bg-opacity-95 lg:bg-opacity-100">
+                <div className="max-w-[700px] ml-auto mr-auto lg:mr-16">
+                    <h1 className="text-[44px] sm:text-5xl md:text-6xl lg:text-[72px] font-black text-[#1a1a1a] leading-[1.05] mb-6 tracking-tight">
+                        Reliable Canadian <br className="hidden sm:block" />
+                        <span className="text-primary-600">freight</span> carrier
+                    </h1>
+
+                    <p className="text-lg lg:text-[19px] text-[#4a4a4a] mb-6 font-medium leading-snug">
+                        Professional trucking and freight transportation services across Canada. We handle both local and long-distance shipments.
+                    </p>
+
+                    {/* Ratings */}
+                    <div className="flex items-center gap-3 mb-10">
+                        <div className="flex text-[#ff9f00] text-xl gap-1">
+                            <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
                         </div>
-
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                            Maximize Your{' '}
-                            <span className="text-primary-500">Trucking</span>{' '}
-                            Profits
-                        </h1>
-
-                        <p className="text-xl text-gray-600 max-w-2xl">
-                            Professional dispatching services that help American truck drivers increase their earnings,
-                            reduce stress, and focus on what matters most - the road ahead.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <a
-                                href="https://wa.me/19433009678"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-primary text-lg px-8 py-4"
-                            >
-                                Start Earning More
-                                <FaArrowRight className="ml-2" />
-                            </a>
-                            <a
-                                href="https://wa.me/19433009678"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn btn-outline text-lg px-8 py-4"
-                            >
-                                <FaPlay className="mr-2" />
-                                Watch How It Works
-                            </a>
-                        </div>
-
-                        <div ref={statsRef} className="flex items-center space-x-8 pt-8 scroll-fade-in scroll-delay-300">
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-primary-500">500+</div>
-                                <div className="text-gray-600">Happy Drivers</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-primary-500">$2M+</div>
-                                <div className="text-gray-600">Revenue Generated</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-primary-500">24/7</div>
-                                <div className="text-gray-600">Support</div>
-                            </div>
-                        </div>
+                        <span className="text-[13px] text-gray-700 font-bold tracking-wide">Trusted by businesses throughout Canada</span>
                     </div>
 
-                    {/* Right Content - Truck Image */}
-                    <div ref={imageRef} className="relative scroll-slide-right">
-                        <div className="relative">
-                            {/* Main Truck Image */}
-                            <div className="relative z-10">
-                                <div className="bg-gradient-to-br from-primary-500 to-primary-600 rounded-3xl p-8 shadow-2xl">
-                                    <div className="bg-white rounded-2xl p-6 shadow-lg">
-                                        <div className="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center">
-                                            <FaTruck className="text-6xl text-primary-500" />
-                                        </div>
-                                        <div className="mt-6 space-y-3">
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-gray-600">Current Load:</span>
-                                                <span className="font-semibold text-gray-800">Electronics</span>
-                                            </div>
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-gray-600">Route:</span>
-                                                <span className="font-semibold text-gray-800">LA → NYC</span>
-                                            </div>
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-gray-600">Earnings:</span>
-                                                <span className="font-bold text-primary-500">$3,200</span>
-                                            </div>
-                                        </div>
+                    {/* Form Component Box */}
+                    <div className="bg-white rounded-[24px] shadow-sm border border-gray-100 p-6 sm:p-8 mb-10">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-[14px] font-medium placeholder-gray-400"
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-[14px] font-medium placeholder-gray-400"
+                            />
+                            <input
+                                type="tel"
+                                placeholder="+1 (   )   -    "
+                                value={formData.phone}
+                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-[14px] font-medium placeholder-gray-400"
+                            />
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-8 mb-8">
+                            <label className="flex items-start gap-3 flex-1 cursor-pointer group">
+                                <input type="checkbox" className="mt-0.5 w-[18px] h-[18px] rounded-md border-gray-300 text-primary-500 focus:ring-primary-500 cursor-pointer" />
+                                <span className="text-[10px] text-gray-500 leading-snug group-hover:text-gray-700 transition-colors">
+                                    I agree to receive email updates, offers, and notifications from Falcon Translines.
+                                </span>
+                            </label>
+                            <label className="flex items-start gap-3 flex-1 cursor-pointer group">
+                                <input type="checkbox" className="mt-0.5 w-[18px] h-[18px] rounded-md border-gray-300 text-primary-500 focus:ring-primary-500 cursor-pointer" />
+                                <span className="text-[10px] text-gray-500 leading-snug group-hover:text-gray-700 transition-colors">
+                                    By checking this box, you agree to receive text messages from Falcon Translines for <a href="#" className="text-primary-500 font-bold hover:underline">Read more...</a>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+                            <button
+                                onClick={handleWhatsAppSubmit}
+                                className="w-full sm:w-auto bg-[#ff817d] hover:bg-[#ff6b67] text-white font-bold py-4 px-10 rounded-xl transition-all shadow-md hover:shadow-lg text-[15px]"
+                            >
+                                Request a Quote
+                            </button>
+
+                            {/* Fake Cloudflare CAPTCHA mock */}
+                            <div className="flex items-center gap-4 border border-gray-200 rounded-xl px-4 py-3 bg-[#fafafa] flex-1 sm:max-w-[260px] cursor-pointer hover:bg-gray-50 transition-colors">
+                                <span className="flex items-center justify-center w-7 h-7 rounded border-2 border-gray-300 bg-white shadow-inner"></span>
+                                <span className="text-[14px] text-gray-700 font-medium">Verify you are human</span>
+                                <div className="ml-auto flex flex-col items-center">
+                                    <span className="text-[24px] font-black text-orange-500 leading-none h-[24px]">☁</span>
+                                    <span className="text-[8px] text-gray-500 font-bold mt-1 tracking-wider">CLOUDFLARE</span>
+                                    <div className="flex text-[7px] text-gray-400 gap-1 mt-0.5">
+                                        <a href="#" className="hover:underline">Privacy</a> • <a href="#" className="hover:underline">Terms</a>
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Floating Elements */}
-                            <div className="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-lg">
-                                <div className="flex items-center space-x-3">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                    <span className="text-sm font-medium text-gray-700">Active</span>
-                                </div>
-                            </div>
-
-                            <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-lg">
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-primary-500">98%</div>
-                                    <div className="text-xs text-gray-600">On-Time Rate</div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+
+                    {/* Criteria Tags Section */}
+                    <div>
+                        <h4 className="text-[14px] font-black text-gray-900 mb-5 uppercase tracking-wide">
+                            <span className="text-primary-500">KEY</span> criteria of partnering with us:
+                        </h4>
+                        <div className="flex flex-wrap gap-3">
+                            {['Hot Shot', 'Box Truck', 'Dry Vans', 'Reefers, Flatbeds, Stepdecks', 'OTR Routes For All Equipment'].map((tag, index) => (
+                                <div key={index} className="inline-flex items-center gap-2 bg-[#e8f0fe] text-blue-600 font-bold px-4 py-2 bg-opacity-70 rounded-full text-[13px] hover:bg-[#dce6fa] transition-colors cursor-pointer">
+                                    {tag} <FaInfoCircle className="text-blue-500 text-[14px]" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
-export default Hero; 
+export default Hero;

@@ -1,20 +1,28 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import HowItWorks from './components/HowItWorks';
+import Services from './components/Services';
+import Advantage from './components/Advantage';
+import About from './components/About';
+import Setup from './components/Setup';
+import FAQ from './components/FAQ';
+import Fleet from './components/Fleet';
 import Footer from './components/Footer';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function App() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-gray-50 font-inter">
             <Navbar />
             <Hero />
-            <HowItWorks />
+            <Services />
+            <Advantage />
+            <Fleet />
+            <About />
+            <Setup />
+            <FAQ />
             <Footer />
-            <FloatingWhatsApp />
         </div>
     );
 }
 
-export default App; 
+export default App;

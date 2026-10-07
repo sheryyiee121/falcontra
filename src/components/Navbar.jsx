@@ -1,131 +1,96 @@
-import React, { useState, useEffect } from 'react';
-import { FaTruck, FaBars, FaTimes } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FiChevronDown, FiMenu, FiX } from 'react-icons/fi';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 50;
-            setScrolled(isScrolled);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            const offset = 80; // Account for fixed navbar height
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-        setIsOpen(false);
-    };
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
-            }`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
+        <nav className="w-full bg-white shadow-sm sticky top-0 z-50">
+            <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-20">
+                <div className="flex justify-between items-center h-20">
                     {/* Logo */}
-                    <div className="flex items-center space-x-2">
-                        <FaTruck className="text-2xl text-primary-500" />
-                        <span className="text-xl font-bold text-gray-800">OnWay Dispatch</span>
+                    <div className="flex-shrink-0 flex items-center mr-8">
+                        <a href="/" className="flex items-center gap-2">
+                            <span className="bg-primary-600 text-white px-2 py-0.5 rounded-sm text-[28px] font-black tracking-tight uppercase leading-none">
+                                FALCON
+                            </span>
+                            <span className="text-[14px] font-extrabold text-gray-900 leading-tight">
+                                Translines<br />Ltd
+                            </span>
+                        </a>
                     </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        <a
-                            href="#home"
-                            onClick={() => scrollToSection('home')}
-                            className="text-gray-700 hover:text-primary-500 transition-colors duration-200 font-medium"
-                        >
-                            Home
+                    <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                        <a href="#services" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                            Services <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
                         </a>
-                        <a
-                            href="#how-it-works"
-                            onClick={() => scrollToSection('how-it-works')}
-                            className="text-gray-700 hover:text-primary-500 transition-colors duration-200 font-medium"
-                        >
-                            How It Works
+                        <a href="#trucks" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                            Trucks <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
                         </a>
-                        <a
-                            href="#contact"
-                            onClick={() => scrollToSection('contact')}
-                            className="text-gray-700 hover:text-primary-500 transition-colors duration-200 font-medium"
-                        >
-                            Contact
+                        <a href="#owner-operators" className="bg-primary-500 text-white font-semibold px-4 py-2 hover:bg-primary-600 transition-colors text-[15px]">
+                            Owner-operators
                         </a>
-                        <a
-                            href="https://wa.me/19433009678"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-primary"
-                        >
-                            Get Started
+                        <a href="#faq" className="text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                            FAQ
+                        </a>
+                        <a href="#company" className="flex items-center text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px]">
+                            Company <FiChevronDown className="ml-1 text-gray-500 w-4 h-4" />
+                        </a>
+                        <a href="#contact" className="text-gray-900 font-medium hover:text-primary-500 transition-colors text-[15px] pr-2">
+                            Contact us
                         </a>
                     </div>
 
-                    {/* Mobile menu button */}
-                    <div className="md:hidden">
+                    {/* Phone Button */}
+                    <div className="hidden lg:flex items-center">
+                        <a href="https://wa.me/15144648797" target="_blank" rel="noopener noreferrer" className="bg-primary-500 text-white font-bold px-6 py-3.5 hover:bg-primary-600 transition-colors text-[15px]">
+                            +1 (514) 464-8797
+                        </a>
+                    </div>
+
+                    {/* Mobile Menu Button */}
+                    <div className="lg:hidden flex items-center">
                         <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-700 hover:text-primary-500 transition-colors duration-200"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="text-gray-900 hover:text-primary-500 focus:outline-none"
                         >
-                            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                            {isMobileMenuOpen ? <FiX className="text-3xl" /> : <FiMenu className="text-3xl" />}
                         </button>
                     </div>
                 </div>
-
-                {/* Mobile Menu */}
-                {isOpen && (
-                    <div className="md:hidden bg-white border-t border-gray-200">
-                        <div className="px-2 pt-2 pb-3 space-y-1">
-                            <a
-                                href="#home"
-                                onClick={() => scrollToSection('home')}
-                                className="block px-3 py-2 text-gray-700 hover:text-primary-500 transition-colors duration-200 font-medium"
-                            >
-                                Home
-                            </a>
-                            <a
-                                href="#how-it-works"
-                                onClick={() => scrollToSection('how-it-works')}
-                                className="block px-3 py-2 text-gray-700 hover:text-primary-500 transition-colors duration-200 font-medium"
-                            >
-                                How It Works
-                            </a>
-                            <a
-                                href="#contact"
-                                onClick={() => scrollToSection('contact')}
-                                className="block px-3 py-2 text-gray-700 hover:text-primary-500 transition-colors duration-200 font-medium"
-                            >
-                                Contact
-                            </a>
-                            <div className="px-3 py-2">
-                                <a
-                                    href="https://wa.me/19433009678"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn btn-primary w-full"
-                                >
-                                    Get Started
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+                <div className="lg:hidden bg-white shadow-xl absolute w-full left-0 top-full border-t border-gray-100">
+                    <div className="px-4 pt-4 pb-6 space-y-4">
+                        <a href="#services" className="flex items-center justify-between text-gray-900 font-medium">
+                            Services <FiChevronDown className="text-gray-500" />
+                        </a>
+                        <a href="#trucks" className="flex items-center justify-between text-gray-900 font-medium">
+                            Trucks <FiChevronDown className="text-gray-500" />
+                        </a>
+                        <a href="#owner-operators" className="block text-primary-500 font-semibold">
+                            Owner-operators
+                        </a>
+                        <a href="#faq" className="block text-gray-900 font-medium">
+                            FAQ
+                        </a>
+                        <a href="#company" className="flex items-center justify-between text-gray-900 font-medium">
+                            Company <FiChevronDown className="text-gray-500" />
+                        </a>
+                        <a href="#contact" className="block text-gray-900 font-medium">
+                            Contact us
+                        </a>
+                        <a href="https://wa.me/15144648797" target="_blank" rel="noopener noreferrer" className="block mt-6 bg-primary-500 text-white font-bold text-center py-3.5">
+                            +1 (514) 464-8797
+                        </a>
+                    </div>
+                </div>
+            )}
         </nav>
     );
 };
 
-export default Navbar; 
+export default Navbar;
