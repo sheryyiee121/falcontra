@@ -3,6 +3,7 @@ import { FiChevronDown, FiMenu, FiX, FiCheckSquare } from 'react-icons/fi';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileTrucksOpen, setIsMobileTrucksOpen] = useState(false);
 
     return (
         <nav className="w-full bg-white shadow-sm sticky top-0 z-50">
@@ -97,27 +98,47 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden bg-white shadow-xl absolute w-full left-0 top-full border-t border-gray-100">
-                    <div className="px-4 pt-4 pb-6 space-y-4">
-                        <a href="#services" className="flex items-center justify-between text-gray-900 font-medium">
-                            Services <FiChevronDown className="text-gray-500" />
+                <div className="lg:hidden bg-white shadow-xl absolute w-full left-0 top-full border-t border-gray-100 max-h-[80vh] overflow-y-auto">
+                    <div className="px-4 pt-4 pb-6 space-y-5">
+                        <a href="/#services" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-gray-900 font-medium">
+                            Services
                         </a>
-                        <a href="#trucks" className="flex items-center justify-between text-gray-900 font-medium">
-                            Trucks <FiChevronDown className="text-gray-500" />
-                        </a>
-                        <a href="#owner-operators" className="block text-primary-500 font-semibold">
+
+                        {/* Mobile Trucks Dropdown */}
+                        <div>
+                            <button
+                                onClick={() => setIsMobileTrucksOpen(!isMobileTrucksOpen)}
+                                className="w-full flex items-center justify-between text-gray-900 font-medium"
+                            >
+                                Trucks <FiChevronDown className={`text-gray-500 transition-transform ${isMobileTrucksOpen ? 'rotate-180' : ''}`} />
+                            </button>
+
+                            {isMobileTrucksOpen && (
+                                <div className="pl-4 space-y-4 mt-4 border-l-2 border-red-100">
+                                    <a href="#truck/box-truck" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">26ft Box Truck Services</a>
+                                    <a href="#truck/dry-van" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">Dry Van Services</a>
+                                    <a href="#truck/step-deck" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">Step Deck Services</a>
+                                    <a href="#truck/reefer" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">Reefer Services</a>
+                                    <a href="#truck/flatbed" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">Flatbed Services</a>
+                                    <a href="#truck/hotshot" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">Hotshot Service</a>
+                                    <a href="#truck/conestoga" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-600 text-[14px] font-medium hover:text-red-500">Conestoga Trailer Services</a>
+                                </div>
+                            )}
+                        </div>
+
+                        <a href="#owner-operators" onClick={() => setIsMobileMenuOpen(false)} className="block text-primary-500 font-semibold">
                             Owner-operators
                         </a>
-                        <a href="#/faq" className="block text-gray-900 font-medium">
+                        <a href="#/faq" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-900 font-medium">
                             FAQ
                         </a>
-                        <a href="/#about" className="flex items-center justify-between text-gray-900 font-medium">
-                            Company <FiChevronDown className="text-gray-500" />
+                        <a href="/#about" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-between text-gray-900 font-medium">
+                            Company
                         </a>
-                        <a href="#/contact" className="block text-gray-900 font-medium">
+                        <a href="#/contact" onClick={() => setIsMobileMenuOpen(false)} className="block text-gray-900 font-medium">
                             Contact us
                         </a>
-                        <a href="https://wa.me/15144648797" target="_blank" rel="noopener noreferrer" className="block mt-6 bg-primary-500 text-white font-bold text-center py-3.5">
+                        <a href="https://wa.me/15144648797" target="_blank" rel="noopener noreferrer" className="block mt-6 bg-primary-500 text-white font-bold text-center py-3.5 rounded-lg active:scale-95 transition-transform">
                             +1 (514) 464-8797
                         </a>
                     </div>
