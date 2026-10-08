@@ -34,8 +34,12 @@ function App() {
 
         // Handle Hash Routing
         const handleHashChange = () => {
-            setHash(window.location.hash);
-            window.scrollTo(0, 0);
+            const newHash = window.location.hash;
+            setHash(newHash);
+            // Only scroll to top if navigating to an entirely distinct routed page
+            if (newHash.startsWith('#truck/') || newHash === '#/faq' || newHash === '#/contact' || newHash === '') {
+                window.scrollTo(0, 0);
+            }
         };
         window.addEventListener('hashchange', handleHashChange);
 

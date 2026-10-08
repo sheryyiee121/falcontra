@@ -11,7 +11,7 @@ const Setup = () => {
     };
 
     return (
-        <section className="bg-white py-24 px-4 sm:px-8 lg:px-12 xl:px-20" id="contact">
+        <section className="bg-white py-24 pb-40 lg:pb-32 px-4 sm:px-8 lg:px-12 xl:px-20" id="contact">
             <div className="max-w-[1400px] mx-auto rounded-[24px] overflow-hidden relative shadow-lg">
                 {/* Background Image */}
                 <img
